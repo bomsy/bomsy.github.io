@@ -5,9 +5,9 @@ permalink:           pretty
 relative_permalinks: true
 
 # Setup
-title:               Poole
-tagline:             The Jekyll Butler
-url:                 http://getpoole.com
+title:               Scribbles
+tagline:             Hubert B Manilla
+url:                 http://bomsy.github.io
 paginate:            1
 baseurl:             "http://bomsy.github.io/"
 
@@ -20,9 +20,9 @@ sass:
 
 # About/contact
 author:
-  name:              Mark Otto
-  url:               https://twitter.com/mdo
-  email:             markdotto@gmail.com
+  name:              Hubert B Manilla
+  url:               https://twitter.com/b4bomsy
+  email:             hubert.manailla@teamaol.com, b4bomsy@gmail.com
 
 # Custom vars
 version:             2.0.0
