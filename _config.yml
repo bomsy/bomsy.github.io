@@ -5,10 +5,10 @@ permalink:           pretty
 relative_permalinks: true
 
 # Setup
-title:               Scribbles
-tagline:             Hubert B Manilla
+title:               Hubert B Manilla
+tagline:             Scribbles
 url:                 http://bomsy.github.io
-paginate:            2
+paginate:            1
 baseurl:             "http://bomsy.github.io/"
 
 # Assets
