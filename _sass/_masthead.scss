@@ -12,10 +12,11 @@
 .masthead-title {
   margin-top: 0;
   margin-bottom: 0;
-  color: #999; /*#505050;*/
+  color: #303030
 
   a {
-    color: #39C;
+    color: #303030;
+    text-decoration: none;
   }
 
   small {
@@ -23,18 +24,6 @@
     font-weight: 400;
     color: #c0c0c0;
     letter-spacing: 0;
-  }
-
-  .h3 {
-    font-size: 1rem;
-    font-style: normal;
-    color: #39C;
-  }
-
-  .h1 {
-    font-size: 1.5rem;
-    font-style:   normal;
-    color: #39C;  
   }
 }
 
