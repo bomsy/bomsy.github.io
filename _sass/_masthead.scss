@@ -5,7 +5,8 @@
 .masthead {
   padding-top:    1rem;
   padding-bottom: 1rem;
-  margin-bottom: 3rem; 
+  margin-bottom: 3rem;
+  text-align: center;
 }
 
 .masthead-title {
@@ -38,9 +39,14 @@
 }
 
 .masthead-links {
+  ul {
+   margin-top: 1rem;
+   margin-bottom: 1rem;
+  }
+
   li {
     display: inline;
-    letter-spacing: 3px;
-    margin: 0 10px;
+    letter-spacing: 4px;
+    margin: 0 1.5rem;
   }
 }
