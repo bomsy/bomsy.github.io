@@ -6,7 +6,7 @@ relative_permalinks: true
 
 # Setup
 title:               Hubert Boma Manilla
-tagline:             scribbling while learning
+tagline:             scribbles
 displayurl:          www.bomsy.github.io
 url:                 http://bomsy.github.io
 paginate:            1
