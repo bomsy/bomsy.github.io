@@ -8,9 +8,9 @@ relative_permalinks: true
 title:               Hubert Boma Manilla
 tagline:             scribbles
 excerpt_separator:   <!--more-->
-url:                 http://bomsy.github.io
+url:                 https://bomsy.github.io
 paginate:            5 
-baseurl:             "http://bomsy.github.io/"
+baseurl:             "https://bomsy.github.io/"
 
 # Assets
 #
