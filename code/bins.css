@@ -1,4 +1,10 @@
 .bins-buttons {
   float: right;
-  margin-left; 5px;
+  margin-left: 5px;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+a:hover.bins-buttons {
+  text-decoration: none;
 }
