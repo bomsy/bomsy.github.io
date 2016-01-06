@@ -23,7 +23,7 @@
 
   // Inject bootstrap css from cdn
   var bsStyleNode = createLinkNode('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', 'stylesheet', 'text/stylesheet')
-  link.parentNode.insertNode(bsStyleNode, link);
+  link.parentNode.insertBefore(bsStyleNode, link);
 
   function createLinkNode(href, rel, type) {
     var linkNode = document.createElement('link');
