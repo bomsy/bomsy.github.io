@@ -11,7 +11,7 @@
       button = document.createElement('i');
       button.id = 'block-button-' + i;
       button.addEventListener('click', function() {
-        
+        showCodeBin();  
       });
       button.className = 'bins-buttons glyphicon glyphicon-list-alt'
       codeBlock.style.border = '1px red solid';
