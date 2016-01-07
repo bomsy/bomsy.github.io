@@ -8,3 +8,12 @@
 a:hover.bins-buttons {
   text-decoration: none;
 }
+
+.bins-iframe {
+  width: 900px;
+  height: 800px;
+  postion: 'absolute';
+  left: 100px;
+  top: 100px;
+  z-index: 999999999;
+}
