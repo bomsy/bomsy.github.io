@@ -57,5 +57,6 @@
   }
 
   findAndLoadCodeButtons();
+  loadCodeBin();
 
 })(window, document);
