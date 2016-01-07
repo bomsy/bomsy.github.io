@@ -26,7 +26,8 @@
     cb.setAttribute('frameBorder', '1');
     cb.setAttribute('name', 'Code Bin Output ');
     cb.id = 'code';
-    cb.src = 'https://blog.bomsy.org/code/codebin/'
+    cb.src = 'https://blog.bomsy.org/code/codebin/';
+    document.body.append(cb);
   }
 
   function showCodeBin() {
