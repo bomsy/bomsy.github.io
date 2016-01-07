@@ -27,7 +27,7 @@
     cb.setAttribute('name', 'Code Bin Output ');
     cb.id = 'code';
     cb.src = 'https://blog.bomsy.org/code/codebin/';
-    document.body.append(cb);
+    document.body.appendChild(cb);
   }
 
   function showCodeBin() {
