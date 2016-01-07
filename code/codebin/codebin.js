@@ -3,7 +3,8 @@
   var textArea = doc.getElementById('code');
   
   var editor = CodeMirror.fromTextArea(textArea, {
-    lineNumbers: true
+    lineNumbers: true,
+    mode: 'htmlmixed'
   });
 
 })(window, document);
