@@ -10,10 +10,10 @@ a:hover.bins-buttons {
 }
 
 .bins-iframe {
-  width: 900px;
-  height: 800px;
-  postion: 'absolute';
-  left: 100px;
-  top: 100px;
+  width: 1200px;
+  height: 900px;
+  postion: absolute;
+  left: 300px;
+  top: 300px;
   z-index: 999999999;
 }

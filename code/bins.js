@@ -5,7 +5,7 @@
   var button = null;
   var cb = null;
 
-  function findAndLoadCodeButtons() {
+  function load() {
     for (var i = 0; i < codeBlocks.length; i++) {
       codeBlock = codeBlocks[i];
       button = document.createElement('i');
@@ -17,17 +17,19 @@
       codeBlock.style.border = '1px red solid';
       codeBlock.parentNode.insertBefore( button, codeBlock)
     }
+    cb = createIframe();
+    document.body.appendChild(cb);
   }
 
-  function loadCodeBin() {
-    cb = document.createElement('iframe');
-    cb.className = 'bins-iframe';
-    cb.setAttribute('sandbox', 'allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts');
-    cb.setAttribute('frameBorder', '1');
-    cb.setAttribute('name', 'Code Bin Output ');
-    cb.id = 'code';
-    cb.src = 'https://blog.bomsy.org/code/codebin/';
-    document.body.appendChild(cb);
+  function createIframe() {
+    var iframe = document.createElement('iframe');
+    iframe.className = 'bins-iframe';
+    iframe.setAttribute('sandbox', 'allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts');
+    iframe.setAttribute('frameBorder', '1');
+    iframe.setAttribute('name', 'Code Bin Output ');
+    ifrmae.id = 'code';
+    iframe.src = 'https://blog.bomsy.org/code/codebin/';
+    return iframe;
   }
 
   function showCodeBin() {
@@ -57,7 +59,6 @@
     return linkNode;
   }
 
-  findAndLoadCodeButtons();
-  loadCodeBin();
+  load();
 
 })(window, document);
