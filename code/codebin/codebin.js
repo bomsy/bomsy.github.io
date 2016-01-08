@@ -18,7 +18,7 @@
 
   var editor = CodeMirror.fromTextArea(textArea, {
     lineNumbers: true,
-    mode: 'htmlmixed'
+    mode: 'javascript'
   });
 
   function setEditorValue(value) {
