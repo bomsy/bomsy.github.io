@@ -27,7 +27,7 @@
     iframe.setAttribute('sandbox', 'allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts');
     iframe.setAttribute('frameBorder', '1');
     iframe.setAttribute('name', 'Code Bin Output ');
-    ifrmae.id = 'code';
+    iframe.id = 'code';
     iframe.src = 'https://blog.bomsy.org/code/codebin/';
     return iframe;
   }
