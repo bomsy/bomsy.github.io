@@ -1,4 +1,5 @@
 (function(window, document) {
+  var host = 'https://blog.bomsy.org';
   var baseUrl = 'https://blog.bomsy.org/code/';
   var codeBlocks = document.getElementsByTagName("pre");
   var codeBlock = null;
@@ -19,6 +20,14 @@
     }
     cb = createIframe();
     document.body.appendChild(cb);
+    hideCodeBin();
+    sendMessage('function run() { console.log(Hello World); }');
+  }
+
+  function sendMessage(message) {
+    if (cb) {
+      cb.contentWindow.postMessage(message, host);
+    }
   }
 
   function createIframe() {
