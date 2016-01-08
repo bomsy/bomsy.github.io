@@ -21,7 +21,6 @@
     cb = createIframe();
     document.body.appendChild(cb);
     hideCodeBin();
-    sendMessage('function run() { console.log(Hello World); }');
   }
 
   function sendMessage(message) {
@@ -38,6 +37,9 @@
     iframe.setAttribute('name', 'Code Bin Output ');
     iframe.id = 'code';
     iframe.src = 'https://blog.bomsy.org/code/codebin/';
+    iframe.onload = function() {
+      sendMessage('function run() { console.log(Hello World); }'); 
+    }
     return iframe;
   }
 
