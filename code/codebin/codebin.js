@@ -4,9 +4,9 @@
   var host = 'https://blog.bomsy.org'
 
   function messageListener(event) {
-    if (event.origin !== host) {
+    /*if (event.origin !== host) {
       return;
-    }
+    }*/
     setEditorValue(event.data);
   }  
 

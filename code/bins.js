@@ -26,7 +26,7 @@
 
   function sendMessage(message) {
     if (cb) {
-      cb.contentWindow.postMessage(message, host);
+      cb.contentWindow.postMessage(message, '*');
     }
   }
 
