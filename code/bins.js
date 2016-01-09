@@ -22,10 +22,13 @@
     cb = createIframe();
 
     var overlay = document.createElement('div');
-    overly.id = 'overlay';
+    overlay.id = 'overlay';
     overlay.className = 'overlay';
     overlay.appendChild(cb);
     document.body.appendChild(overlay);
+
+    // Set the size and allign the overlay based on the viewport
+    
     hideCodeBin();
   }
 
