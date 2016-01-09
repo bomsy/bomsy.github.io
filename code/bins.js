@@ -18,8 +18,14 @@
       codeBlock.style.border = '1px red solid';
       codeBlock.parentNode.insertBefore( button, codeBlock)
     }
+
     cb = createIframe();
-    document.body.appendChild(cb);
+
+    var overlay = document.createElement('div');
+    overly.id = 'overlay';
+    overlay.className = 'overlay';
+    overlay.appendChild(cb);
+    document.body.appendChild(overlay);
     hideCodeBin();
   }
 

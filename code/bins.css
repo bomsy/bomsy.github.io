@@ -10,10 +10,17 @@ a:hover.bins-buttons {
 }
 
 .bins-iframe {
-  width: 1200px;
-  height: 900px;
+  width: 100%;
+  height: 100%;
+}
+
+.overlay {
   position: absolute;
-  left: 300px;
-  top: 300px;
   z-index: 999999999;
+  opacity: 0.9;
+  width: 800px;
+  height: 800px;
+  border: 5px solid #ccc;
+  left: 100px;
+  top: 100px;
 }
