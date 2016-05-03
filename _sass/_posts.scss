@@ -37,13 +37,20 @@
   display: block;
   margin-top: -.5rem;
   margin-bottom: 1rem;
+  margin-left: .5rem;
   color: #9a9a9a;
 }
 
 .list-post .post-date {
   display: block;
   margin-top: -.5rem;
+  margin-bottom: 1rem;
+  margin-left: .5rem;
   color: #9a9a9a;
+}
+
+.list-post a.post-link {
+  margin-top: -.5rem;
 }
 
 
