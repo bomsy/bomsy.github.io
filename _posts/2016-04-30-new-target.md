@@ -5,10 +5,12 @@ published: true
 comments: true
 ---
 
-As part of the ES2015 goodies we get the `new.target` property. In JavaScript, functions are invoked as constructors when called with the `new` keyword.
+As part of the ES2015 goodies we get the `new.target` property.
+<!--more-->
+In JavaScript, functions are invoked as constructors when called with the `new` keyword.
 The `this` value for a constructor function is the object returned by the function, for a normal function `this` would be the global object. if a constructor
 function is mistakenly called without the `new` keyword, `this` becomes the global object, causing unexpected issues.
-<!--more-->
+
 To protect against this, prior to ES2015 the `instanceof` operator was used as shown below
 
         function Foo() {

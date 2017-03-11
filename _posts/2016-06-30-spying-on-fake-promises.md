@@ -4,12 +4,13 @@ title: Spying on fake promises
 published: true
 comments: true
 ---
-Ran into an issue today, which took me a little bit of time to figure out. Over time i've discovered that
-documenting experiences has a way of providing perspective, greater insight and you can help others while
-at it.
+Ran into an issue today, which took me a little bit of time to figure out.
+<!--more-->
+Over time i've discovered that documenting experiences has a way of providing perspective,
+greater insight and you can help others while at it.
 
 So here's my experience trying to spy on a function that returns a promise
-<!--more-->
+
 
 ### Problem
 I was trying to test some code which looks something like this

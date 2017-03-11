@@ -42,4 +42,14 @@
     letter-spacing: 4px;
     margin: 0 1.5rem;
   }
+  a {
+    text-decoration: none;
+  }
+  a: hover {
+    font-weight: bold;
+  }
+
+  a: active {
+    font-weight: bolder;
+  }
 }
