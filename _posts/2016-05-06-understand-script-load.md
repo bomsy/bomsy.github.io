@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Script loading on the web
-published: true
+published: false
 comments: true
 ---
 On the Web, scripts are used to add interactions to html pages. These scripts are loaded into pages using the `script` tag.
