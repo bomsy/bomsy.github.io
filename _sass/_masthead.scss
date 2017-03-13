@@ -42,16 +42,17 @@
     letter-spacing: 4px;
     margin: 0 1.5rem;
   }
+  a {
+    text-decoration: none;
+  }
 
   a:hover {
     border-bottom: 1px solid #268bd2;
-    padding-bottom: .3rem;
-    text-decoration: none;
+    padding-bottom: .3rem;  
   }
 
   a:active {
     border-bottom: 1px solid #268bd2;
     padding-bottom: .3rem;
-    text-decoration: none;
   }
 }
