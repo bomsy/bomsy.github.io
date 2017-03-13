@@ -4,8 +4,8 @@ title: Spying on fake promises
 published: true
 comments: true
 ---
-Ran into an issue today, which took me a little bit of time to figure out.
-<!--more-->
+Ran into an issue today, which took me a little bit of time to figure out<!--more-->.
+
 Over time i've discovered that documenting experiences has a way of providing perspective,
 greater insight and you can help others while at it.
 

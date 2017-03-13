@@ -5,8 +5,8 @@ published: true
 comments: true
 ---
 
-The ECMAScript standard specifies internal properties, some of which are common to all JavaScript objects.
-<!--more-->
+The ECMAScript standard specifies internal properties<!--more-->, some of which are common to all JavaScript objects.
+
 These are invisible properties which exist solely for specification purposes.
 
 The `[[Class]]` is one of such. Some others include `[[Prototype]]`, `[[Get]]`, `[[Put]]` etc. For a complete set of these properties

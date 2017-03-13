@@ -11,9 +11,8 @@ title: Home
         {{ post.title }}
       </a>
     </h2>
-
     <time datetime="{{ post.date | date_to_xmlschema }}" class="post-date">{{ post.date | date_to_string }}</time>
-    {{ post.excerpt }}<a href="{{ site.baseurl }}{{ post.url }}" class="post-link">read more</a> 
+    - <a href="{{ site.baseurl }}{{ post.url }}" class="post-link">{{ post.excerpt }}</a>
   </article>
   {% endfor %}
 </div>

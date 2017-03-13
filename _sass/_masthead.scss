@@ -44,12 +44,14 @@
   }
 
   a:hover {
-    font-weight: bold;
-    text-decoration;
+    border-bottom: 1px solid #268bd2;
+    padding-bottom: .3rem;
+    text-decoration: none;
   }
 
   a:active {
-    font-weight: bolder;
-    text-decoration;
+    border-bottom: 1px solid #268bd2;
+    padding-bottom: .3rem;
+    text-decoration: none;
   }
 }
