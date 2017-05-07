@@ -5,7 +5,7 @@ published: true
 comments: true
 ---
 
-The ECMAScript standard specifies internal properties<!--more-->, some of which are common to all JavaScript objects.
+The ECMAScript standard specifies internal properties...<!--more-->, some of which are common to all JavaScript objects.
 
 These are invisible properties which exist solely for specification purposes.
 

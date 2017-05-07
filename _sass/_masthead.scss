@@ -13,13 +13,20 @@
   margin-top: 0;
   margin-bottom: 0;
   color: #303030;
-  text-transform: uppercase;
-
+  text-transform: lowercase;
+  letter-spacing: 3px;
   a {
     color: #303030;
   }
 
+  h1 {
+    font-size: 2rem;
+  }
+
   a:hover {
+    text-decoration: none;
+  }
+  a:active {
     text-decoration: none;
   }
 
@@ -48,7 +55,7 @@
 
   a:hover {
     border-bottom: 1px solid #268bd2;
-    padding-bottom: .3rem;  
+    padding-bottom: .3rem;
   }
 
   a:active {
