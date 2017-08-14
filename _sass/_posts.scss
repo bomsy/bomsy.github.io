@@ -12,9 +12,8 @@
 .list-post {
   margin-bottom: 0.5em;
   padding-bottom: 0.25em;
-  padding-left: 0px;
-  border-radius: 5px;
-  transition:  padding-left 0.5s linear;
+  padding-left: 5px;
+  transition:  padding-left 0.25s linear;
 }
 
 
@@ -61,8 +60,9 @@
 }
 
 .list-post:hover {
-  padding-left: 5px;
-  transition:  padding-left 0.5s linear;
+  padding-left: 10px;
+  transition:  padding-left 0.25s linear;
+  border-left: 2px solid #bf616a;
   cursor: pointer;
 }
 
