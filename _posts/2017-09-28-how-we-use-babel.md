@@ -5,12 +5,14 @@ published: false
 comments: true
 ---
 
-The firefox debugger has undergone a massive rewrite in the last two years, moving away from old mozilla specific technologies like xul etc, to more morden technologies like react, webpack and BABEL. 
-<!--more-->
+The firefox debugger has undergone a massive rewrite in the last two years<!--more-->,  moving away from old mozilla specific technologies like XUL etc, to more morden technologies like React, webpack and *babel*. 
 
-Babel is a tool for compiling Javascript into Javascript. It generates an Abstract Syntax Tree (AST) which can be transformed, transversed or manipulated in various ways for use.  Babel  and AST's have played a major part in growth of the mordern web tooling ecosystem. For in depth details see placeholder for babel docs
+
+*Babel* is a tool for compiling Javascript into Javascript. It generates an Abstract Syntax Tree (AST) which can be transformed, transversed or manipulated in various ways for use.  Babel  and AST's have played a major part in growth of the mordern web tooling ecosystem. For in depth details see placeholder for babel docs
+
 
 Over the past year, we have used babel extensively in building the debugger, from disabling non-executable lines so breakpoints cannot be set on those lines to highlighting out of scope code etc
+
 
 I felt it would be cool to write a couple of blog posts, documenting some of our coolest use cases and go into some debbuger internals as we go.
 
@@ -20,7 +22,7 @@ In this blog post, we will look at one of our simple use cases.
 
 ### Use Case One: Empty Lines
 
-##### Problem
+#### Problem
 
 With empty lines , we want to disable the lines in the editor that do not have executable code so breakpoints can't be set where not useful (as shown in the figure below). 
 
@@ -94,9 +96,8 @@ export function getAst(source: Source) {
 }
 ```
 
-Once we have the AST, we can do a lot of poweful things. The screenshot below shows a part of what the AST for `todo.js` looks like.   
+Once we have the AST, we can do a lot of poweful things. The screenshot below shows a part of what the AST for `todo.js` looks like. 
 
-####  AST
 
 ![Screen Shot 2017-09-27 at 13.21.49](/assets/imgs/ast_view.png)
 

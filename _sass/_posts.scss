@@ -10,8 +10,7 @@
 }
 
 .list-post {
-  margin-bottom: 0.5em;
-  padding-bottom: 0.25em;
+  margin-bottom: 1em;
   padding-left: 5px;
   transition:  padding-left 0.25s linear;
 }
@@ -24,7 +23,7 @@
 .post-title a {
   color: #bf616a;
   text-decoration: none;
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 300;
   text-transform: lowercase;
 }
@@ -32,6 +31,7 @@
   text-transform: uppercase;
   font-weight: 300;
   font-size: 18px;
+  padding-bottom: 2rem;
 }
 .post-title a:hover {
   color: #bf616a;
@@ -44,8 +44,8 @@
 
 // Meta data line below post title
 .post .post-date {
-  display: inline;
-  margin-top: -.5rem;
+  display: block;
+  margin-top: 0.25rem;
   margin-bottom: 1rem;
   color: #9a9a9a;
 }
@@ -53,7 +53,7 @@
 .list-post .post-date {
   display: inline;
   margin-top: -.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   color: #9a9a9a;
   text-transform: capitalize;
   font-size: 18px;
@@ -69,6 +69,7 @@
 // post.excerpt
 .list-post p {
   display: inline;
+  margin-left: 5px;
 }
 
 .list-post a.post-link {
@@ -103,7 +104,6 @@
 
   li {
     small {
-      font-size: 75%;
       color: #999;
     }
 
