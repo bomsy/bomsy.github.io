@@ -14,39 +14,43 @@ So here's my experience trying to spy on a function that returns a promise
 
 ### Problem
 I was trying to test some code which looks something like this
-
-        $scope.loadItems = function() {
-          var opts = {
-            ...
-          };
-          Service.getItems(opts)
-            .then(...);
-        };
+```js
+$scope.loadItems = function() {
+  var opts = {
+    ...
+  };
+  Service.getItems(opts)
+    .then(...);
+};
+```
 
 `Service.getItems` gets the items by making an http request and returns a promise.
 Testing its workings is done some where else, so i just needed to mock it for my use.
 
 A mock of the service looks like this
-
-        ...
-        var MockService = {
-          getItems: function(options) {
-            return {
-              then: function() {}
-            }
-          }
-        };
-        ...
+```js
+...
+var MockService = {
+  getItems: function(options) {
+    return {
+      then: function() {}
+    }
+  }
+};
+...
+```
 
 Then the test for `$scope.loadItems`
 
-        it('should load items', function() {
-          ...
-          var itemsSpy = spyOn(Service, 'getItems');
-          $scope.loadItems();
-          expect(itemsSpy).toHaveBeenCalledWith(...);
-        });
-        ...
+```js
+it('should load items', function() {
+  ...
+  var itemsSpy = spyOn(Service, 'getItems');
+  $scope.loadItems();
+  expect(itemsSpy).toHaveBeenCalledWith(...);
+});
+...
+```
 
 Basically, i spy on `getItems`, then i call the `loadItems` which should call the `getItems`,
 which returns a promise of which when resolved, the `.then` get's called. Finally i check if
@@ -54,8 +58,9 @@ getItems was called.
 
 While running the tests, i got following error
 
-        TypeError: 'undefined' is not an object (evaluating 'Service.getItems(opts).then').
-
+```js
+TypeError: 'undefined' is not an object (evaluating 'Service.getItems(opts).then').
+```
 
 This would mean that `getItems` returns `undefined`, instead of the promise object which has got the
 `.then` function on it, how could this be?
@@ -85,18 +90,20 @@ We can now call a function to do what our original function was to do before it 
 
 So the code for the `$scope.loadItems` test becomes
 
-        it('should load items', function() {
-          ...
-          var itemsSpy = spyOn(Service, 'getItems')
-            .and.callFake(function() {
-              return {
-                then: function() {}
-              }
-            });
-          $scope.loadItems();
-          expect(itemsSpy).toHaveBeenCalledWith(...);
-        });
-        ...
+```js
+it('should load items', function() {
+  ...
+  var itemsSpy = spyOn(Service, 'getItems')
+    .and.callFake(function() {
+      return {
+        then: function() {}
+      }
+    });
+  $scope.loadItems();
+  expect(itemsSpy).toHaveBeenCalledWith(...);
+});
+...
+```
 
 and voila!
 

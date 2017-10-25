@@ -12,10 +12,11 @@
 .list-post {
   margin-bottom: 1em;
   padding-left: 5px;
-  transition:  padding-left 0.25s linear;
 }
 
-
+.posts {
+  text-align: center;
+}
 
 // Blog post or page title
 .page-title,
@@ -26,12 +27,6 @@
   font-size: 26px;
   font-weight: 300;
   text-transform: lowercase;
-}
-.post-title time {
-  text-transform: uppercase;
-  font-weight: 300;
-  font-size: 18px;
-  padding-bottom: 2rem;
 }
 .post-title a:hover {
   color: #bf616a;
@@ -48,21 +43,18 @@
   margin-top: 0.25rem;
   margin-bottom: 1rem;
   color: #9a9a9a;
+  font-size: 16px;
 }
 
 .list-post .post-date {
-  display: inline;
-  margin-top: -.5rem;
-  margin-bottom: 1.5rem;
+  display: block;
   color: #9a9a9a;
   text-transform: capitalize;
-  font-size: 18px;
+  font-weight: 300;
+  font-size: 16px;
 }
 
 .list-post:hover {
-  padding-left: 10px;
-  transition:  padding-left 0.25s linear;
-  border-left: 2px solid #bf616a;
   cursor: pointer;
 }
 
@@ -73,18 +65,17 @@
 }
 
 .list-post a.post-link {
-  margin-top: -.5rem;
-  color: #4A4A4A;
+  margin-top: -0.5rem;
+  color: #4a4a4a;
   cursor: pointer;
   text-decoration: none;
 }
 
 .list-post a.post-link:hover {
-  margin-top: -.5rem;
+  margin-top: -0.5rem;
   color: #303030;
   cursor: pointer;
 }
-
 
 // Related posts
 .related {

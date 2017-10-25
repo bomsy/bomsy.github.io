@@ -3,7 +3,7 @@
 // Super small header above the content for site name and short description.
 
 .masthead {
-  padding-top:    1rem;
+  padding-top: 1rem;
   padding-bottom: 1rem;
   margin-bottom: 1rem;
   text-align: center;
@@ -41,14 +41,13 @@
 
 .masthead-links {
   ul {
-   margin: 0;
-   padding: 0;
+    margin: 0;
+    padding: 0;
   }
 
   li {
     display: inline;
-    letter-spacing: 4px;
-    margin: 0 1.5rem;
+    margin: 0 0.5rem;
   }
   a {
     text-decoration: none;
@@ -56,11 +55,11 @@
 
   a:hover {
     border-bottom: 1px solid #268bd2;
-    padding-bottom: .3rem;
+    padding-bottom: 0.3rem;
   }
 
   a:active {
     border-bottom: 1px solid #268bd2;
-    padding-bottom: .3rem;
+    padding-bottom: 0.3rem;
   }
 }

@@ -8,7 +8,8 @@ title:               Hubert Boma Manilla
 tagline:             scribbles
 excerpt_separator:   <!--more-->
 url:                 https://blog.bomsy.org
-paginate:            5 
+paginate:            5
+paginate_path:       "/blog/page:num/"
 baseurl:             ""
 gems:               [jekyll-paginate]
 
