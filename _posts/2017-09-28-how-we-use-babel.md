@@ -5,20 +5,17 @@ published: false
 comments: true
 ---
 
-The firefox debugger has undergone a massive rewrite in the last two years<!--more-->,  moving away from old mozilla specific technologies like XUL etc, to more morden technologies like React, webpack and *babel*.
+The firefox debugger has undergone a huge rewrite in the last two + years<!--more-->, moving away from old mozilla specific technologies like XUL etc, to more modern technologies like React, webpack and _babel_.
 
+[_Babel_][babel] is a tool for compiling Javascript into Javascript. It generates an [Abstract Syntax Tree (AST)][ast_wiki] which can be transformed, transversed or manipulated in various ways for use. Babel and AST's have played a major part in growth of the modern web tooling ecosystem.
 
-*Babel* is a tool for compiling Javascript into Javascript. It generates an Abstract Syntax Tree (AST) which can be transformed, transversed or manipulated in various ways for use.  Babel  and AST's have played a major part in growth of the mordern web tooling ecosystem. For in depth details see placeholder for babel docs
+Over the past year, we have used babel extensively in building the debugger, from disabling non-executable lines so breakpoints cannot be set to highlighting out of scope code and much more.
 
-
-Over the past year, we have used babel extensively in building the debugger, from disabling non-executable lines so breakpoints cannot be set on those lines to highlighting out of scope code etc
-
-
-I felt it would be cool to write a couple of blog posts, documenting some of our coolest use cases and go into some debbuger internals as we go.
+I felt it would be cool to write a couple of blog posts, documenting some of our coolest use cases and looking into some debugger internals as we go.
 
 And by the way the firefox devtools is really cool now, you should try it! 😉
 
-In this blog post, we will look at one of our simple use cases.
+In this blog post, we will look at one of our simpler use cases.
 
 ### Use Case One: Empty Lines
 
@@ -26,15 +23,15 @@ In this blog post, we will look at one of our simple use cases.
 
 With empty lines , we want to disable the lines in the editor that do not have executable code so breakpoints can't be set where not useful (as shown in the figure below).
 
-![Screen Shot 2017-09-22 at 14.01.30](/assets/imgs/code_view.png)
+![Screen Shot 2017-09-22 at 14.01.30][code_view]
 
-The grayed out lines number, indicate which lines are disabled.
+The grayed out lines (as shown in the pic above), indicate which lines are disabled.
 
 In the next section, we will look into the technical details of how this is achieved.
 
 ##### Solution
 
-At a high level, we parse the source, and get an Abstract Syntax Tree (AST), which is used to get the data for the disabled lines which the UI uses to handle renders.  
+At a high level, we parse the source, and get the AST, which is used to get the data for the disabled lines which the UI uses to handle renders.
 
 Firstly, when any source file (in this case `todo.js` ) is selected and displayed, a call is made to the `getEmptyLines` function passing the source object which contains all the data about the source selected.
 
@@ -55,7 +52,7 @@ export default function getEmptyLines(sourceToJS) {
 
 This takes the source and tries to get the AST for it by calling the`getAst` function.
 
-`getAst`  parses the source using the Babylon parser, adds the generated AST to the cache, and returns the AST, as shown below
+`getAst` parses the source using the Babylon parser, adds the generated AST to the cache, and returns the AST, as shown below
 
 ```js
 ...
@@ -98,10 +95,9 @@ export function getAst(source: Source) {
 
 Once we have the AST, we can do a lot of poweful things. The screenshot below shows a part of what the AST for `todo.js` looks like.
 
+![Screen Shot 2017-09-27 at 13.21.49][ast_view]
 
-![Screen Shot 2017-09-27 at 13.21.49](/assets/imgs/ast_view.png)
-
-For a complete view of the AST [check this out]( https://astexplorer.net/#/gist/8ef7a7ea2124d997984e7cea06ab9ae4/16ffabe564617bca00acc693d406961ecf718f46).
+For a complete view of the AST [see here][ast].
 
 Yay, we have our AST!
 
@@ -120,7 +116,6 @@ export default function getEmptyLines(sourceToJS) {
 `getExecutable` takes the tokens from the AST, and simply filters out all comment or EOF tokens, and since only the lines are needed, it maps over results returning just the start lines. Now! There will be lines with multiple tokens, this will cause a line to show up more than once in the array, so it makes sure the lines are unique before returning the array.
 
 ```js
-
 const commentTokens = ["CommentBlock", "CommentLine"];
 ...
 
@@ -139,7 +134,7 @@ function getExecutableLines(ast) {
 }
 ```
 
-Now we have our executable lines, `getLines`  returns an array of all the lines in source, from 0 to the end line on the last token in the AST.
+Now we have our executable lines, `getLines` returns an array of all the lines in source, from 0 to the end line on the last token in the AST.
 
 ```js
 ...
@@ -156,7 +151,7 @@ function getLines(ast) {
 }
 ```
 
-Once all the neccesarry line data is gotten, the difference in the two line arrays is determined  using the lodash `difference`  utility function.
+Once all the neccesarry line data is gotten, the difference in the two line arrays is determined using the lodash `difference` utility function.
 
 ```js
 export default function getEmptyLines(sourceToJS) {
@@ -164,25 +159,30 @@ export default function getEmptyLines(sourceToJS) {
   ...
   return difference(lines, executableLines);
 }
-
 ```
 
 Our `getEmptyLines` function handles the bulk of the work, all that is left, is to pass the data to the react component to be rendered (this is out of our scope).
 
-Its also worth mentioning that `getEmptylines ` is run in a web worker to handle the performance hit that might be encountered when processing really large files over thousands of  lines found in the wild.
+Its also worth mentioning that `getEmptylines` is run in a web worker to handle the performance hit that might be encountered when processing really large files over thousands of lines found in the wild.
 
 So finally here is what the array of empty lines for the `todo.js` file
 
 ```js
-[0, 2, 5, 6, 7, 8, 9, 11, 12, 17, 18, 26, 27]
+[0, 2, 5, 6, 7, 8, 9, 11, 12, 17, 18, 26, 27];
 ```
 
 Does this match our disabled lines in the figure above?
 
- Yay it does! Taking into consideration that our code mirror lines are 1 based (start from 1 rather than 0)
-
-
+Yay it does! Noting that codemirror lines are one based (starts at 1 rather than 0).
 
 #### Conclusion
 
-We are still refining most of the code and fixing bugs. This just shows how it works generally. Babel and AST
+Babel powers alot in Firefox debugger these days. If you are interested in working on these and other cool stuff.
+Check us out [here][debugger].
+
+[babel]: https://babeljs.io/
+[ast_wiki]: https://en.wikipedia.org/wiki/Abstract_syntax_tree
+[ast]: https://astexplorer.net/#/gist/8ef7a7ea2124d997984e7cea06ab9ae4/16ffabe564617bca00acc693d406961ecf718f46
+[ast_view]: /assets/imgs/ast_view.png
+[code_view]: /assets/imgs/code_view.png
+[debugger]: https://github.com/devtools-html/debugger.html
