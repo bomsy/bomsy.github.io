@@ -15,7 +15,7 @@
 }
 
 .posts {
-  text-align: center;
+  text-align: left;
 }
 
 // Blog post or page title
@@ -26,7 +26,7 @@
   text-decoration: none;
   font-size: 26px;
   font-weight: 300;
-  text-transform: lowercase;
+  text-transform: capitalize;
 }
 .post-title a:hover {
   color: #bf616a;
@@ -34,7 +34,7 @@
 .page-title,
 .post-title {
   margin: 0;
-  text-transform: lowercase;
+  text-transform: capitalize;
 }
 
 // Meta data line below post title
