@@ -1,7 +1,7 @@
 ---
 layout: post
 title: how we use babel in firefox debugger  - empty lines
-published: true
+published: false
 comments: true
 ---
 
