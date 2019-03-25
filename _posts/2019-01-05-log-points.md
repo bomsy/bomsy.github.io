@@ -6,7 +6,7 @@ comments: true
 ---
 
 Logging has been the staple for debugging since the beginning of time. You place a log or print statement of
-which some form at position in the code file and it
+some form at position in the code file and it
 
 <!--more-->
 
@@ -32,7 +32,11 @@ Enter log points!
 These are a special kind of breakpoint that when set, never get hit, rather they log the results of
 the expression to the console.
 
-- **No need to context switch**, once in the debugger, the developer can focus on figuring out the issue
+They recently landed in Firefox 67.
+
+With log points
+
+- **No need to context switch**, once in the debugger, the developer can focus on figuring out the issue,
   without having to switch back and forth between the browser developer tool and the code editor. This increases productivity.
 
 - **No littering with console logs** since the logging is now done in the debugger, no need to litter the code with
@@ -54,6 +58,10 @@ the expression to the console.
   normal and conditional breakpoints.
 
   ![][log-points-3]
+
+  ### Conclusion
+
+  Debug related tasks should be done in the debugger rather in the code.
 
 [log-points-4]: /assets/imgs/log-points-4.jpeg
 [log-points-2]: /assets/imgs/log-points-2.jpeg
