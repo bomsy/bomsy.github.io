@@ -27,7 +27,7 @@ We can do better! i'm think any action relating to debugging should be done in t
 
 Enter log points!
 
-### Log points
+## Log points
 
 These are a special kind of breakpoint that when set, never get hit, rather they log the results of
 the expression to the console.
@@ -47,19 +47,19 @@ With log points
 - Open the desired code file in browser devtools debugger.
 - Right click on the gutter at the specific line and select `Add log`.
 
-  ![][log-points-4]
+![][log-points-4]
 
 - In the input panel enter the expression to log
 - press the enter key
 
-  ![][log-points-2]
+![][log-points-2]
 
 - A log point is added to the gutter, and to the breakpoints panel. Log points are coloured purple to distinguish them from
   normal and conditional breakpoints.
 
-  ![][log-points-3]
+![][log-points-3]
 
-### Conclusion
+## Conclusion
 
 Debug related tasks should be done in the debugger rather in the code.
 
