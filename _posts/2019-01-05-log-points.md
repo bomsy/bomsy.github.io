@@ -13,10 +13,10 @@ some form at position in the code file and it
 Every web developer needing to debug a web app have used or still use `console.log` heavily.
 A typical workflow would be
 
-- add a `console.log` with an expression to code file e.g `console.log(foo === true)`
-- switch over to the browser to display the page
-- open up the browser devtools console to see the output logged.
-  This process is repeated as much as needed until the issue being debugged is solved.
+1. add a `console.log` with an expression to code file e.g `console.log(foo === true)`
+2. switch over to the browser to display the page
+3. open up the browser devtools console to see the output logged.
+   This process is repeated as much as needed until the issue being debugged is solved.
 
 Some of the issues with this workflow
 
@@ -59,9 +59,9 @@ With log points
 
   ![][log-points-3]
 
-  ### Conclusion
+### Conclusion
 
-  Debug related tasks should be done in the debugger rather in the code.
+Debug related tasks should be done in the debugger rather in the code.
 
 [log-points-4]: /assets/imgs/log-points-4.jpeg
 [log-points-2]: /assets/imgs/log-points-2.jpeg
