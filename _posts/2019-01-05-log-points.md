@@ -1,12 +1,12 @@
 ---
 layout: post
 title: Debugging using log points
-published: true
+published: false
 comments: true
 ---
 
-Logging has been the staple for debugging since the beginning of time. You place a log or print statement of
-some form at position in the code file and it
+Logging has been a deugging staple since the beginning of time. You place a log or print statement of
+some form at a position in the code file and on code execution it logs output to the console.
 
 <!--more-->
 
