@@ -21,7 +21,7 @@
 }
 
 .posts {
-  text-align: left;
+  text-align: center;
 }
 
 // Blog post or page title
@@ -30,8 +30,7 @@
 .post-title a {
   color: #bf616a;
   text-decoration: none;
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 30px;
 }
 .post-title a:hover {
   color: #bf616a;
@@ -47,7 +46,7 @@
   margin-top: 0.25rem;
   margin-bottom: 1rem;
   color: #4a4a4a;
-  font-size: 16px;
+  font-size: 24px;
   font-style: italic;
 }
 
@@ -82,7 +81,7 @@
 
 .list-post a.post-link {
   margin-top: -0.5rem;
-  color: #4a4a4a;
+  color: #000000;
   cursor: pointer;
   text-decoration: none;
 }
