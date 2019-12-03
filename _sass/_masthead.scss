@@ -6,7 +6,14 @@
   padding-top: 1rem;
   padding-bottom: 1rem;
   margin-bottom: 1rem;
-  text-align: center;
+  text-align: left;
+
+  .home-logo {
+    border-radius: 50%;
+    margin: auto;
+    width: 150px;
+    height: 150px;
+  }
 }
 
 .masthead-title {

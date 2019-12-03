@@ -5,18 +5,20 @@ published: false
 comments: true
 ---
 
-Logging has been a deugging staple since the beginning of time. You place a log or print statement of
-some form at a position in the code file and on code execution it logs output to the console.
+Logging has been a debugging staple since the beginning of time. You place a log or print statement of
+some form at a position in the code file and on code execution it logs output to the console without
+pausing in anyway.
 
 <!--more-->
 
-Every web developer needing to debug a web app have used or still use `console.log` heavily.
+Any web developer needing to debug an app, must have used  the `console.log` at some point.
+
 A typical workflow would be
 
 1. add a `console.log` with an expression to code file e.g `console.log(foo === true)`
 2. switch over to the browser to display the page
-3. open up the browser devtools console to see the output logged.
-   This process is repeated as much as needed until the issue being debugged is solved.
+3. open up the browser devtools to see the output logged.
+   This process is repeated as much as is needed until the issue being debugged is solved.
 
 Some of the issues with this workflow
 

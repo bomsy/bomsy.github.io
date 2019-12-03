@@ -9,12 +9,10 @@ title: Blog
     <h2 class="post-title">
       <a href="{{ site.baseurl }}{{ post.url }}"> {{ post.title }} </a>
     </h2>
-    <time datetime="{{ post.date | date_to_xmlschema }}" class="post-date"
-      >{{ post.date | date_to_string }}
+    <time datetime="{{ post.date | date_to_xmlschema }}" class="post-date">
+      {{ post.date | date_to_string }}
     </time>
-    <a href="{{ site.baseurl }}{{ post.url }}" class="post-link"
-      >{{ post.excerpt }}</a
-    >
+    <a href="{{ site.baseurl }}{{ post.url }}" class="post-link">{{ post.excerpt }}</a>
   </article>
   {% endfor %}
 </div>
