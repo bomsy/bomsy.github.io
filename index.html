@@ -3,40 +3,51 @@ layout: default
 title: Home
 ---
 <div class="home">
-  <!--my image -->
-  <!--<img class="home-logo" src="/assets/imgs/my_img.jpg"/>-->
   <p>
-    senior software engineer <a href="https://www.mozilla.org">@Mozilla</a> working on <a href="https://twitter.com/firefoxdevtools"> developer tools</a>, formerly <a href="https://www.comparethemarket.com/">@Comparethemarket</a> and <a href="https://www.oath.com">@Oath</a> doing frontend things, passionate about the web platform and building
+    senior software engineer <a href="https://www.mozilla.org">@mozilla</a> working on <a href="https://twitter.com/firefoxdevtools"> developer tools</a>, formerly <a href="https://www.comparethemarket.com/">@comparethemarket</a> and <a href="https://www.oath.com">@oath</a> doing frontend things, passionate about the web platform and building
     better tools for it. You can see the stuff i work on <a href="https://github.com/bomsy">github</a>. I am on <a href="https://twitter.com/b4bomsy">twitter</a> and on <a href="https://www.linkedin.com/in/hubert-boma-manilla-17b9041b/">linkedin</a>.
-    You can also checkout my <a href="/blog">blogposts</a>.
   </p>
+
   <section class="projects">
     <h2 class="post-title">
-      <a href="#projects">
-        Projects
-      </a>
-      <p>
-        <ul>
-          <li>
-            <a href="https://blog.bomsy.org/3dsnakegame/">
-              <img class="project-logo" src="/assets/imgs/3d_snake.png"/>
-            </a>
-          </li>
-          <li>
-            <a href="https://www.npmjs.com/package/grunt-regex-replace">
-              <img class="project-logo" src="/assets/imgs/grunt_reg_replace.png"/>
-            </a>
-          </li>
-        </ul>
-      </p>
+      <a href="#projects">Projects</a>
     </h2>
+    <p>
+      <a href="https://www.npmjs.com/package/grunt-regex-replace">grunt regex replace plugin.</a>
+    </p>
   </section>
-  <section class="">
+  <section>
     <h2 class="post-title">
-      <a href="#talks">
-        Talks
-      </a>
+      <a href="#talks">Talks</a>
     </h2>
-    <p><iframe src="https://player.vimeo.com/video/347562957" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></p>
+    <p>
+      <a href="https://player.vimeo.com/video/347562957">data structures & algorithims for the frontend.</a>
+    </p>
+  </section>
+  <section>
+    <h2 class="post-title">
+      <a href="#projects">Posts</a>
+      <div class="posts">
+        {% for post in paginator.posts %}
+        <article class="list-post">
+          <h2 class="post-title">
+            <a href="{{ site.baseurl }}{{ post.url }}"> {{ post.title }} </a>
+          </h2>
+          <time datetime="{{ post.date | date_to_xmlschema }}" class="post-date">
+            {{ post.date | date_to_string }}
+          </time>
+          <a href="{{ site.baseurl }}{{ post.url }}" class="post-link">{{ post.excerpt }}</a>
+        </article>
+        {% endfor %}
+      </div>
+      <div class="pagination">
+        {% if paginator.previous_page %}
+        <a class="pagination-item newer" href="{{ paginator.previous_page_path | prepend: site.baseurl }}">Newer</a>
+        {% else %} <span class="pagination-item newer">Newer</span> {% endif %} {% if
+        paginator.next_page %}
+        <a class="pagination-item older" href="{{ paginator.next_page_path | prepend: site.baseurl }}">Older</a>
+        {% else %} <span class="pagination-item older">Older</span> {% endif %}
+      </div>
+    </h2>
   </section>
 </div>

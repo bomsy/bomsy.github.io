@@ -1,32 +1,32 @@
 # Permalinks
 #
 # Use of `relative_permalinks` ensures post links from the index work properly.
-permalink:           pretty
+permalink: pretty
 
 # Setup
-title:               Hubert Boma Manilla
-tagline:             scribbles
-excerpt_separator:   <!--more-->
-url:                 https://blog.bomsy.org
-paginate:            5
-paginate_path:       "/blog/page:num/"
-baseurl:             ""
-gems:               [jekyll-paginate]
+title: Hubert Boma Manilla
+tagline: scribbles
+excerpt_separator: <!--more-->
+url: https://blog.bomsy.org
+paginate: 5
+paginate_path: "/blog/page:num/"
+baseurl: ""
+gems: [jekyll-paginate]
 
 # Assets
 #
 # We specify the directory for Jekyll so we can use @imports.
 sass:
-  sass_dir:          _sass
-  style:            :compressed
+  sass_dir: _sass
+  style: :compressed
 
 # About/contact
 author:
-  name:              Hubert B Manilla
-  url:               https://twitter.com/b4bomsy
-  email:             hubert.manailla@teamaol.com, b4bomsy@gmail.com
+  name: Hubert B Manilla
+  url: https://twitter.com/b4bomsy
+  email: hubert.manilla@mozilla.com, b4bomsy@gmail.com
 
 # Custom vars
-version:             2.0.0
+version: 2.0.0
 github:
-  repo:              https://github.com/bomsy/bomsy.github.io
+  repo: https://github.com/bomsy/bomsy.github.io
