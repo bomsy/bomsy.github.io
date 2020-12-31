@@ -5,7 +5,7 @@ published: false
 comments: true
 ---
 
-The firefox debugger has undergone a huge rewrite in the last two + years<!--more-->, moving away from old mozilla specific technologies like XUL etc, to more modern technologies like React, webpack and _babel_.
+The firefox debugger has undergone a huge rewrite in the last two + years, moving away from old mozilla specific technologies like XUL etc, to more modern technologies like React, webpack and _babel_.
 
 [_Babel_][babel] is a tool for compiling Javascript into Javascript. It generates an [Abstract Syntax Tree (AST)][ast_wiki] which can be transformed, transversed or manipulated in various ways for use. Babel and AST's have played a major part in growth of the modern web tooling ecosystem.
 

@@ -5,9 +5,32 @@ title: Home
 <div class="home">
   <p>
     senior software engineer <a href="https://www.mozilla.org">@mozilla</a> working on <a href="https://twitter.com/firefoxdevtools"> developer tools</a>, formerly <a href="https://www.comparethemarket.com/">@comparethemarket</a> and <a href="https://www.oath.com">@oath</a> doing frontend things, passionate about the web platform and building
-    better tools for it. You can see the stuff i work on <a href="https://github.com/bomsy">github</a>. I am on <a href="https://twitter.com/b4bomsy">twitter</a> and on <a href="https://www.linkedin.com/in/hubert-boma-manilla-17b9041b/">linkedin</a>.
+    better tools for it. You can see the stuff i work on <a href="https://github.com/bomsy">github</a>. I am alsoon <a href="https://twitter.com/b4bomsy">twitter</a> and on <a href="https://www.linkedin.com/in/hubert-boma-manilla-17b9041b/">linkedin</a>.
   </p>
-
+  <section>
+    <h2 class="post-title">
+      <a href="#projects">Posts</a>
+    </h2>
+    <div class="posts">
+      {% for post in site.posts %}
+      <p class="list-post">
+        <a href="{{ site.baseurl }}{{ post.url }}">
+          <time datetime="{{ post.date | date_to_xmlschema }}" class="post-date">
+          {{ post.date | date: "%d-%m-%y" }}
+          </time> ~ {{ post.title }} </a>
+      </p>
+      {% endfor %}
+    </div>
+    <!--Remove pagination till i have enough posts -->
+    <!--<div class="pagination">
+        {% if paginator.previous_page %}
+        <a class="pagination-item newer" href="{{ paginator.previous_page_path | prepend: site.baseurl }}">Newer</a>
+        {% else %} <span class="pagination-item newer">Newer</span> {% endif %} {% if
+        paginator.next_page %}
+        <a class="pagination-item older" href="{{ paginator.next_page_path | prepend: site.baseurl }}">Older</a>
+        {% else %} <span class="pagination-item older">Older</span> {% endif %}
+      </div>-->
+  </section>
   <section class="projects">
     <h2 class="post-title">
       <a href="#projects">Projects</a>
@@ -24,30 +47,5 @@ title: Home
       <a href="https://player.vimeo.com/video/347562957">data structures & algorithims for the frontend.</a>
     </p>
   </section>
-  <section>
-    <h2 class="post-title">
-      <a href="#projects">Posts</a>
-      <div class="posts">
-        {% for post in paginator.posts %}
-        <article class="list-post">
-          <h2 class="post-title">
-            <time datetime="{{ post.date | date_to_xmlschema }}" class="post-date">
-              {{ post.date | date_to_string }}
-            </time>
-            <a href="{{ site.baseurl }}{{ post.url }}"> {{ post.title }} </a>
-          </h2>
-        </article>
-        {% endfor %}
-      </div>
-      <!--Remove pagination till i have enough posts -->
-      <!--<div class="pagination">
-        {% if paginator.previous_page %}
-        <a class="pagination-item newer" href="{{ paginator.previous_page_path | prepend: site.baseurl }}">Newer</a>
-        {% else %} <span class="pagination-item newer">Newer</span> {% endif %} {% if
-        paginator.next_page %}
-        <a class="pagination-item older" href="{{ paginator.next_page_path | prepend: site.baseurl }}">Older</a>
-        {% else %} <span class="pagination-item older">Older</span> {% endif %}
-      </div>-->
-    </h2>
-  </section>
+
 </div>

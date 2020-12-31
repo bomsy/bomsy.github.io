@@ -1,0 +1,101 @@
+I"l<p>Ran into an issue today, which took me a little bit of time to figure out.</p>
+
+<p>Over time i’ve discovered that documenting experiences has a way of providing perspective,
+greater insight and you can help others while at it.</p>
+
+<p>So here’s my experience trying to spy on a function that returns a promise</p>
+
+<h3 id="problem">Problem</h3>
+
+<p>I was trying to test some code which looks something like this</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$scope</span><span class="p">.</span><span class="nx">loadItems</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">opts</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">...</span>
+  <span class="p">};</span>
+  <span class="nx">Service</span><span class="p">.</span><span class="nx">getItems</span><span class="p">(</span><span class="nx">opts</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(...);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">Service.getItems</code> gets the items by making an http request and returns a promise.
+Testing its workings is done some where else, so i just needed to mock it for my use.</p>
+
+<p>A mock of the service looks like this</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">...</span>
+<span class="kd">var</span> <span class="nx">MockService</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">getItems</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">then</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+<span class="p">...</span>
+</code></pre></div></div>
+
+<p>Then the test for <code class="highlighter-rouge">$scope.loadItems</code></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">should load items</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="p">...</span>
+  <span class="kd">var</span> <span class="nx">itemsSpy</span> <span class="o">=</span> <span class="nx">spyOn</span><span class="p">(</span><span class="nx">Service</span><span class="p">,</span> <span class="dl">'</span><span class="s1">getItems</span><span class="dl">'</span><span class="p">);</span>
+  <span class="nx">$scope</span><span class="p">.</span><span class="nx">loadItems</span><span class="p">();</span>
+  <span class="nx">expect</span><span class="p">(</span><span class="nx">itemsSpy</span><span class="p">).</span><span class="nx">toHaveBeenCalledWith</span><span class="p">(...);</span>
+<span class="p">});</span>
+<span class="p">...</span>
+</code></pre></div></div>
+
+<p>Basically, i spy on <code class="highlighter-rouge">getItems</code>, then i call the <code class="highlighter-rouge">loadItems</code> which should call the <code class="highlighter-rouge">getItems</code>,
+which returns a promise of which when resolved, the <code class="highlighter-rouge">.then</code> get’s called. Finally i check if
+getItems was called.</p>
+
+<p>While running the tests, i got following error</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">TypeError</span><span class="p">:</span> <span class="dl">'</span><span class="s1">undefined</span><span class="dl">'</span> <span class="nx">is</span> <span class="nx">not</span> <span class="nx">an</span> <span class="nx">object</span> <span class="p">(</span><span class="nx">evaluating</span> <span class="dl">'</span><span class="s1">Service.getItems(opts).then</span><span class="dl">'</span><span class="p">).</span>
+</code></pre></div></div>
+
+<p>This would mean that <code class="highlighter-rouge">getItems</code> returns <code class="highlighter-rouge">undefined</code>, instead of the promise object which has got the
+<code class="highlighter-rouge">.then</code> function on it, how could this be?</p>
+
+<h3 id="solution">Solution</h3>
+
+<p>Digging deep, i noticed that it becomes <code class="highlighter-rouge">undefined</code> after the spy gets set.</p>
+
+<p>What was the spy doing? Looking into how spies work, the key to spying is that the function been
+spied on gets monkey patched with the some code, enabling the spy to determine when the function
+gets called.</p>
+
+<p>Now that would be the cause of my issue. The spy monkey patches my mock <code class="highlighter-rouge">getItems</code> function so that
+it no longer returns the promise, then when <code class="highlighter-rouge">.then</code> gets called in <code class="highlighter-rouge">$scope.loadItems</code> it can’t be found,
+causing the error above.</p>
+
+<p>How do we fix this?</p>
+
+<p>My goal is to be able to spy on the function, but also to maintain its
+original behavior (and return the promise with the expected <code class="highlighter-rouge">.then</code>).</p>
+
+<p>Jasmine allows do stuff when the function being spied on gets called. One of the things
+we can do is call a fake function using <code class="highlighter-rouge">.and.callFake()</code>.</p>
+
+<p>We can now call a function to do what our original function was to do before it got spied on.</p>
+
+<p>So the code for the <code class="highlighter-rouge">$scope.loadItems</code> test becomes</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">should load items</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="p">...</span>
+  <span class="kd">var</span> <span class="nx">itemsSpy</span> <span class="o">=</span> <span class="nx">spyOn</span><span class="p">(</span><span class="nx">Service</span><span class="p">,</span> <span class="dl">'</span><span class="s1">getItems</span><span class="dl">'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">and</span><span class="p">.</span><span class="nx">callFake</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="p">{</span>
+        <span class="na">then</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{}</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+  <span class="nx">$scope</span><span class="p">.</span><span class="nx">loadItems</span><span class="p">();</span>
+  <span class="nx">expect</span><span class="p">(</span><span class="nx">itemsSpy</span><span class="p">).</span><span class="nx">toHaveBeenCalledWith</span><span class="p">(...);</span>
+<span class="p">});</span>
+<span class="p">...</span>
+</code></pre></div></div>
+
+<p>and voila!</p>
+
+<p>Hope this helps someone!</p>
+:ET

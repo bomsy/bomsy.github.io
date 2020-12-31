@@ -4,16 +4,18 @@ title: Spying on fake promises
 published: true
 comments: true
 ---
-Ran into an issue today, which took me a little bit of time to figure out...<!--more-->
+
+Ran into an issue today, which took me a little bit of time to figure out.
 
 Over time i've discovered that documenting experiences has a way of providing perspective,
 greater insight and you can help others while at it.
 
 So here's my experience trying to spy on a function that returns a promise
 
-
 ### Problem
+
 I was trying to test some code which looks something like this
+
 ```js
 $scope.loadItems = function() {
   var opts = {
@@ -28,6 +30,7 @@ $scope.loadItems = function() {
 Testing its workings is done some where else, so i just needed to mock it for my use.
 
 A mock of the service looks like this
+
 ```js
 ...
 var MockService = {
@@ -71,7 +74,7 @@ Digging deep, i noticed that it becomes `undefined` after the spy gets set.
 
 What was the spy doing? Looking into how spies work, the key to spying is that the function been
 spied on gets monkey patched with the some code, enabling the spy to determine when the function
- gets called.
+gets called.
 
 Now that would be the cause of my issue. The spy monkey patches my mock `getItems` function so that
 it no longer returns the promise, then when `.then` gets called in `$scope.loadItems` it can't be found,
@@ -81,7 +84,6 @@ How do we fix this?
 
 My goal is to be able to spy on the function, but also to maintain its
 original behavior (and return the promise with the expected `.then`).
-
 
 Jasmine allows do stuff when the function being spied on gets called. One of the things
 we can do is call a fake function using `.and.callFake()`.

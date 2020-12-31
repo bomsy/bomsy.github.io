@@ -1,0 +1,78 @@
+I"¨<p>As part of the ES2015 goodies we get the <code class="highlighter-rouge">new.target</code> property.</p>
+
+<p>In JavaScript, functions are invoked as constructors when called with the <code class="highlighter-rouge">new</code> keyword.
+The <code class="highlighter-rouge">this</code> value for a constructor function is the object returned by the function, for a normal function <code class="highlighter-rouge">this</code> would be the global object. if a constructor
+function is mistakenly called without the <code class="highlighter-rouge">new</code> keyword, <code class="highlighter-rouge">this</code> becomes the global object, causing unexpected issues.</p>
+
+<p>To protect against this, prior to ES2015 the <code class="highlighter-rouge">instanceof</code> operator was used as shown below</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Foo</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="k">this</span> <span class="k">instanceof</span> <span class="nx">Foo</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="dl">"</span><span class="s2">Foo must be called with new</span><span class="dl">"</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The <code class="highlighter-rouge">instanceof</code> operator just <em>checks if the prototype of the constructor function can be found on the prototype chain of the object</em>. If thatâ€™s the case,
+we know the object is an instance of that constructor.</p>
+
+<h3 id="newtarget">new.target</h3>
+
+<p>The <code class="highlighter-rouge">new.target</code> property also allows us determine if a function or constructor has been invoked with the <code class="highlighter-rouge">new</code> keyword. An interesting note, is that <code class="highlighter-rouge">new.target</code> is a meta
+property avaliable to all functions and not a <code class="highlighter-rouge">target</code> property on some sort of <code class="highlighter-rouge">new</code> object ( impossible since <code class="highlighter-rouge">new</code> is reserved ) i.e <code class="highlighter-rouge">new.target !== new[target]</code>.</p>
+
+<p>For functions not invoked with the <code class="highlighter-rouge">new</code> keyword, <code class="highlighter-rouge">new.target</code> is <code class="highlighter-rouge">undefined</code>.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Test</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">new</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">Test</span><span class="p">();</span> <span class="c1">// logs undefined</span>
+<span class="k">new</span> <span class="nx">Test</span><span class="p">();</span> <span class="c1">// logs "Test" object</span>
+</code></pre></div></div>
+
+<p>For class constructors ( ES2015 classes ), <code class="highlighter-rouge">new.target</code> is the constructor directly invoked by the <code class="highlighter-rouge">new</code> keyword, this also applies to subclasses where the parent class
+constructor is delegated from the child class constructor.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Parent</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">new</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">Child</span> <span class="kd">extends</span> <span class="nx">Parent</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">new</span> <span class="nx">Parent</span><span class="p">();</span> <span class="c1">// logs "Parent" object</span>
+<span class="k">new</span> <span class="nx">Child</span><span class="p">();</span> <span class="c1">// logs "Child" object</span>
+</code></pre></div></div>
+
+<p>For arrow functions, the <code class="highlighter-rouge">new.target</code> will always refer to the <code class="highlighter-rouge">new.target</code> of its immediate enclosing function.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Foo</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">enclosing function -&gt;</span><span class="dl">"</span><span class="p">,</span> <span class="k">new</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span>
+  <span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">inner arrow function -&gt;</span><span class="dl">"</span><span class="p">,</span> <span class="k">new</span><span class="p">.</span><span class="nx">target</span><span class="p">))();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>We can now rewrite the the first sample code which uses <code class="highlighter-rouge">instanceof</code> to look like this instead</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Foo</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">new</span><span class="p">.</span><span class="nx">target</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="dl">"</span><span class="s2">Foo must be called with new</span><span class="dl">"</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>References</p>
+
+<ol>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new.target">MDN Reference</a></li>
+  <li><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-built-in-function-objects-construct-argumentslist-newtarget">ECMAScript 2015 Standard</a></li>
+</ol>
+:ET

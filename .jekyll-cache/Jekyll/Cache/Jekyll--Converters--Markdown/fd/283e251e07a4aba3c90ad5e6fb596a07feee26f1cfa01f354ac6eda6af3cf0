@@ -1,0 +1,107 @@
+I"�<p>The ECMAScript standard specifies internal properties, some of which are common to all JavaScript objects.</p>
+
+<p>These are invisible properties which exist solely for specification purposes.</p>
+
+<p>The <code class="highlighter-rouge">[[Class]]</code> is one of such. Some others include <code class="highlighter-rouge">[[Prototype]]</code>, <code class="highlighter-rouge">[[Get]]</code>, <code class="highlighter-rouge">[[Put]]</code> etc. For a complete set of these properties
+see the ECMAScript standard. These properties are used to define the semantics of the object values.</p>
+
+<h3 id="class-property"><code class="highlighter-rouge">[[Class]]</code> property</h3>
+
+<p>The <code class="highlighter-rouge">[[Class]]</code> property stores a string which defines the kind of object. Function objects have the <code class="highlighter-rouge">[[Class]]</code> value “Function”, Date objects have the
+<code class="highlighter-rouge">[[Class]]</code> value “Date”, Object objects have the <code class="highlighter-rouge">[[Class]]</code> value “Object” and so on. The table below ( taken from Dave Herman’s book “Effective JavaScript” )
+shows the <code class="highlighter-rouge">[[Class]]</code> values and corresponding constructors matching the types of objects.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>[[Class]]</th>
+      <th style="text-align: left">Construction</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>“Array”</td>
+      <td style="text-align: left"><code class="highlighter-rouge">new Array()</code>, <code class="highlighter-rouge">[]</code></td>
+    </tr>
+    <tr>
+      <td>“Boolean”</td>
+      <td style="text-align: left"><code class="highlighter-rouge">new Boolean()</code></td>
+    </tr>
+    <tr>
+      <td>“Date”</td>
+      <td style="text-align: left"><code class="highlighter-rouge">new Date()</code></td>
+    </tr>
+    <tr>
+      <td>“Error”</td>
+      <td style="text-align: left"><code class="highlighter-rouge">new Error()</code>, <code class="highlighter-rouge">new RangeError()</code> etc</td>
+    </tr>
+    <tr>
+      <td>“Function”</td>
+      <td style="text-align: left"><code class="highlighter-rouge">new Function()</code></td>
+    </tr>
+    <tr>
+      <td>“JSON”</td>
+      <td style="text-align: left"><code class="highlighter-rouge">JSON</code></td>
+    </tr>
+    <tr>
+      <td>“Math”</td>
+      <td style="text-align: left"><code class="highlighter-rouge">Math</code></td>
+    </tr>
+    <tr>
+      <td>“Number”</td>
+      <td style="text-align: left"><code class="highlighter-rouge">new Number()</code></td>
+    </tr>
+    <tr>
+      <td>“Object”</td>
+      <td style="text-align: left"><code class="highlighter-rouge">new Object()</code>, <code class="highlighter-rouge">{}</code></td>
+    </tr>
+    <tr>
+      <td>“RegExp”</td>
+      <td style="text-align: left"><code class="highlighter-rouge">new RegExp()</code></td>
+    </tr>
+    <tr>
+      <td>“String”</td>
+      <td style="text-align: left"><code class="highlighter-rouge">new String()</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="determine-the-class-value-in-javascript">Determine the <code class="highlighter-rouge">[[Class]]</code> value in JavaScript</h3>
+
+<p>In JavaScript the “Object.prototype.toString” method returns the string representation of the object. Internally it queries the <code class="highlighter-rouge">[[Class]]</code> property and uses
+its value as part of the string generated for the receiver. This can be seen in the example below:-</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="p">{};</span>
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">[];</span>
+
+<span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toString</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">d</span><span class="p">);</span> <span class="c1">// [object Date]</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toString</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">o</span><span class="p">);</span> <span class="c1">// [object Object]</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toString</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span> <span class="c1">// [object Array]</span>
+</code></pre></div></div>
+
+<p>These internal properties are essential in <em>defining the behaviour of objects</em>, An example would be if an object is not a pure array ( i.e the <code class="highlighter-rouge">[[Class]]</code> property
+value is specified as “Array” ) there are no guarantees on the behaviour of its methods and the value of its properties.</p>
+
+<p>In the example below the <code class="highlighter-rouge">concat</code> method of the array object depends on the value of the <code class="highlighter-rouge">[[Class]]</code> property, if an argument passed into the method is a true array
+it concatenates its contents to that of the result else it adds it as a single object.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// True array</span>
+<span class="p">[</span><span class="dl">"</span><span class="s2">a</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">b</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">c</span><span class="dl">"</span><span class="p">].</span><span class="nx">concat</span><span class="p">([</span><span class="dl">"</span><span class="s2">4</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">5</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">6</span><span class="dl">"</span><span class="p">]);</span> <span class="c1">// ["a", "b", "c", "4", "5", "6"]</span>
+
+<span class="c1">// arguments is not a true array</span>
+<span class="kd">function</span> <span class="nx">fakeArray</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">[</span><span class="dl">"</span><span class="s2">a</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">b</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">c</span><span class="dl">"</span><span class="p">].</span><span class="nx">concat</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">fakeArray</span><span class="p">(</span><span class="dl">"</span><span class="s2">4</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">5</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">6</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// ["a", "b", "c", { 0:'4', 1:'5', 2:'6'}]</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>References</p>
+
+<ol>
+  <li><a href="http://www.ecma-international.org/ecma-262/6.0/index.html">ECMAScript Standard</a></li>
+  <li>Effective JavaScript by Dave Herman</li>
+</ol>
+:ET
